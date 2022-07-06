@@ -41,3 +41,39 @@ def excluir(cod):
         print('{} Excluido'.format(con.rowcount))
     except Exception as erro:
         print(erro)
+
+def cadastrar(cpf, senha):
+    try:
+        sql = "insert into login(codigo, cpf, senha) values('', '{}', '{}')".format(cpf, senha)
+        con.execute(sql)
+        db_connection.commit()#Inserção de dados no BD
+        print("{} Inserido!".format(con.rowcount))
+    except Exception as erro:
+        return erro
+
+def loginCpf(CPFDigitado):
+    try:
+        sql = 'select cpf from login'
+        con.execute(sql)
+
+        for (codigo, cpf, senha) in con:
+            if CPFDigitado == cpf:
+                return True
+        return False
+    except Exception as erro:
+        print(erro)
+
+
+def loginSenha(senhaDigitada):
+    try:
+        sql = 'select senha from login'
+        con.execute(sql)
+
+        for(codigo, cpf, senha) in con:
+            if senhaDigitada == senha:
+                return True
+        return False
+    except Exception as erro:
+        print(erro)
+
+

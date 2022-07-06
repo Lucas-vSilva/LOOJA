@@ -3,7 +3,7 @@ import this
 this.opcao = -1
 this.codigo = 0
 this.campo = ''
-
+this.opcao1 = -1
 def menu():
     print('\nEscolha uma das opções abaixo:  \n\n' +
           '1. Cadastrar \n'                        +
@@ -25,12 +25,6 @@ def operacao():
             preco = input()
             print('Informe a quantidade: ')
             quantidade = input()
-            #resp = str(input('Deseja continuar [S/N]'))
-            #if resp in 'N':
-                #break
-            #elif resp in 'S':
-                #return (this.opcao == 1):
-
             operacoes.inserir(nome, preco, quantidade)
         elif this.opcao == 2:
             #print('Informe o codigo que deseja consultar:')
@@ -60,3 +54,31 @@ def operacao():
             operacoes.excluir(this.codigo)
     else:
         print('Opção escolhida não é válida!')
+
+def menu1():
+    print('\nEscolha uma das opções abaixo:  \n\n' +
+          '1. Cadastrar Login \n'                  +
+          '2. Login \n'                            +
+          '0. Sair\n')
+    this.opcao1 = int(input())
+
+def operacao1():
+        while (this.opcao1 != 0):
+            menu1()
+            if this.opcao1 == 1:
+                print('Informe o CPF: ')
+                cpf = input()
+                print('Informe a Senha: ')
+                senha = input()
+                operacoes.cadastrar(cpf, senha)
+            elif this.opcao1 == 2:
+                print('Insira o CPF:')
+                this.cpf = int(input())
+                print('Insira a Senha:')
+                this.senha = input()
+                operacoes.loginCpf()
+                operacoes.loginSenha()
+                operacao()
+        else:
+            print('Opção escolhida não é válida!')
+        operacao()
