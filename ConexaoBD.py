@@ -6,7 +6,7 @@ def conectar():
         db_connection = mysql.connector.connect(host='localhost',
                                                 user='root',
                                                 password='',
-                                                database='Loja')
+                                                database='looja')
         print('Conectado com sucesso!')
         return db_connection
     except mysql.connector.Error as erro: #Guardando as possíveis exceções na variável erro

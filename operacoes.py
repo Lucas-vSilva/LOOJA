@@ -1,12 +1,13 @@
 import mysql.connector
 import ConexaoBD #Classe que faz a conexão com o banco de dados
+import menu
 
 db_connection = ConexaoBD.conectar()
 con = db_connection.cursor()
 
 def inserir(nome, preco, quantidade):
     try:
-        sql = "insert into itens(codigo, nome, preço, quantidade) values('', '{}', '{}', '{}')".format(nome, preco, quantidade)
+        sql = "insert into item(codigo, nome, preco, quantidade) values('', '{}', '{}', '{}')".format(nome, preco, quantidade)
         con.execute(sql)
         db_connection.commit()#Inserção de dados no BD
         print("{} Inserido!".format(con.rowcount))
@@ -15,7 +16,7 @@ def inserir(nome, preco, quantidade):
 
 def consultar():
     try:
-        sql = 'select * from itens'
+        sql = 'select * from item'
         con.execute(sql)
 
         for(codigo, nome, preco, quantidade) in con:
@@ -26,7 +27,7 @@ def consultar():
 
 def atualizar(cod, campo, novoDado):
     try:
-        sql = "update itens set {} = '{}' where codigo = '{}'".format(campo, novoDado, cod)
+        sql = "update item set {} = '{}' where codigo = '{}'".format(campo, novoDado, cod)
         con.execute(sql)
         db_connection.commit()
         print('{} Atualizado!'.format(con.rowcount))
@@ -35,7 +36,7 @@ def atualizar(cod, campo, novoDado):
 
 def excluir(cod):
     try:
-        sql = "delete FROM itens WHERE codigo = '{}'".format(cod)
+        sql = "delete FROM item WHERE codigo = '{}'".format(cod)
         con.execute(sql)
         db_connection.commit()
         print('{} Excluido'.format(con.rowcount))
@@ -51,29 +52,30 @@ def cadastrar(cpf, senha):
     except Exception as erro:
         return erro
 
-def loginCpf(CPFDigitado):
+def loginCpfSenha(CPFDigitado, senhaDigitada):
     try:
-        sql = 'select cpf from login'
+        sql = 'select * from login'
         con.execute(sql)
-
         for (codigo, cpf, senha) in con:
-            if CPFDigitado == cpf:
+            if cpf == CPFDigitado and senha == senhaDigitada:
                 return True
-        return False
+            else:
+                print('\n')
+                return False
+
     except Exception as erro:
         print(erro)
 
 
-def loginSenha(senhaDigitada):
+def login(cpf, senha):
     try:
-        sql = 'select senha from login'
-        con.execute(sql)
-
-        for(codigo, cpf, senha) in con:
-            if senhaDigitada == senha:
-                return True
-        return False
+        if loginCpfSenha(cpf, senha) == True:
+            print('Logado com Sucesso !')
+            print('\n')
+            menu.operacao()
+        else:
+            print('Login e Senha incorretos!')
+            print('\n')
     except Exception as erro:
         print(erro)
-
 

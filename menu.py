@@ -24,7 +24,7 @@ def operacao():
             print('Informe o preço: ')
             preco = input()
             print('Informe a quantidade: ')
-            quantidade = input()
+            quantidade = int(input())
             operacoes.inserir(nome, preco, quantidade)
         elif this.opcao == 2:
             #print('Informe o codigo que deseja consultar:')
@@ -73,12 +73,9 @@ def operacao1():
                 operacoes.cadastrar(cpf, senha)
             elif this.opcao1 == 2:
                 print('Insira o CPF:')
-                this.cpf = int(input())
+                this.CPFDigitado = int(input())
                 print('Insira a Senha:')
-                this.senha = input()
-                operacoes.loginCpf()
-                operacoes.loginSenha()
-                operacao()
+                this.senhaDigitada = input()
+                operacoes.login(this.CPFDigitado, this.senhaDigitada)
         else:
-            print('Opção escolhida não é válida!')
-        operacao()
+            print('EXIT!!')
